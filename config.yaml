@@ -1,0 +1,26 @@
+# Source Database Configuration
+source:
+  environment: development
+  host: localhost
+  port: 5432
+  user: postgres
+  password: postgres
+  database: postgres
+
+# Destination Database Configuration
+destination:
+  environment: production
+  host: localhost
+  port: 5432
+  user: postgres
+  password: postgres
+  database: postgres
+
+# Schema Configuration
+schema:
+  default: public
+
+# Table Configuration
+tables:
+  migration_log: tbl_migration_log
+  migration_activity: tbl_migration_activity
