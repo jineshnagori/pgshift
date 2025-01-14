@@ -16,11 +16,11 @@ destination:
   password: postgres
   database: postgres
 
-# Schema Configuration
-schema:
-  default: public
-
 # Table Configuration
-tables:
-  migration_log: tbl_migration_log
-  migration_activity: tbl_migration_activity
+table:
+  migration_log:
+    table_name: tbl_migration_log
+    table_schema: public
+  migration_activity:
+    table_name: tbl_migration_activity
+    table_schema: public

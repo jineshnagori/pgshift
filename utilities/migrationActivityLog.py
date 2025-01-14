@@ -13,11 +13,11 @@ def migration_activity_log(cursor, table_schema, table_name, status, message, sc
     updated_by = ''
     created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    schema = config['schema']['default']
-    table = config['table']['migration_log']
+    schema = config['table']['migration_log']['schema']
+    table = config['table']['migration_log']['table']
     query = f"""
         INSERT INTO {schema}.{table}
-        (migration_log_id, table_schema, table_name, status, message, script, created_at, updated_at, created_by, updated_by)
+        (migration_log_id, schema_name, table_name, status, message, script, created_at, updated_at, created_by, updated_by)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
     """
     try:
