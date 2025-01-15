@@ -11,8 +11,8 @@ def migration_activity_log(cursor, table_schema, table_name, status, message, sc
     migration_log_id = str(uuid.uuid4())
     updated_by = ''
     updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    schema = config['table']['migration_log']['schema']
-    table = config['table']['migration_log']['table']
+    schema = config['table']['migration_log']['table_schema']
+    table = config['table']['migration_log']['table_name']
     query = f"""
         INSERT INTO {schema}.{table}
         (migration_log_id, table_schema, table_name, status, message, script, updated_at, updated_by)

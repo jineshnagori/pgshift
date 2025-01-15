@@ -7,8 +7,8 @@ config = load_config('./config.yaml')
 
 # Function to fetch migration info
 def fetch_migration_info(cursor):
-    table_schema = config['schema']['default']
-    table_name = config['table']['migration_activity']
+    table_schema = config['table']['migration_activity']['table_schema']
+    table_name = config['table']['migration_activity']['table_name']
     query = f"""
         SELECT migration_activity_id, table_schema, table_name, 
             requires_data_migration, truncate_load, "sequence"

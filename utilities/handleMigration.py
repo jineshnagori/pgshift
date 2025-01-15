@@ -78,3 +78,6 @@ def handle_migration(cursor_src, cursor_dest, migration_info):
         
         dest_count = fetch_row_count(cursor_dest, table_schema, table_name)
         print(f"Destination table updated row count: {dest_count}\n")
+    else:
+        print(f"Skipping {table_schema}.{table_name} as it does not require data migration\n")
+        migration_activity_log(cursor_dest, table_schema, table_name, 'SUCCESS', f"Table {table_schema}.{table_name} does not require data migration", "Table does not require data migration")

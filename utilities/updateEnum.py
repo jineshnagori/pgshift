@@ -12,8 +12,6 @@ def update_enum(src_table_schema, dest_table_schema, cursor_src, cursor_dest, ta
         if enum['enum_type'] not in dest_enums
     ]
 
-    print(f"Missing enums: {missing_enums}\n")
-
     # Prepare CREATE TYPE statements for missing enums
     additional_enums = []
     try:
