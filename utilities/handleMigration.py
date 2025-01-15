@@ -60,7 +60,12 @@ def handle_migration(cursor_src, cursor_dest, migration_info):
         
         source_count = fetch_row_count(cursor_src, table_schema, table_name)
         print(f"Source table row count: {source_count}")
-        
+        migration_activity_log(cursor_src, table_schema, table_name, 'SUCCESS', f"Source table row count: {source_count}", "Source table row count")
+
+        dest_count = fetch_row_count(cursor_dest, table_schema, table_name)
+        print(f"Destination table row count: {dest_count}")
+        migration_activity_log(cursor_dest, table_schema, table_name, 'SUCCESS', f"Destination table row count: {dest_count}", "Destination table row count")
+
         table_data = fetch_table_data(cursor_src, table_schema, table_name)
         
         if truncate_load:
@@ -76,8 +81,11 @@ def handle_migration(cursor_src, cursor_dest, migration_info):
             
             upsert_data(cursor_dest, table_schema, table_name, table_data, primary_key_columns)
         
-        dest_count = fetch_row_count(cursor_dest, table_schema, table_name)
-        print(f"Destination table updated row count: {dest_count}\n")
+        update_dest_count = fetch_row_count(cursor_dest, table_schema, table_name)
+        print(f"Destination table updated row count: {update_dest_count}\n")
+        migration_activity_log(cursor_dest, table_schema, table_name, 'SUCCESS', f"Destination table updated row count: {update_dest_count}", "Destination table updated row count")
+        print(f"=============================================\n")
     else:
         print(f"Skipping {table_schema}.{table_name} as it does not require data migration\n")
         migration_activity_log(cursor_dest, table_schema, table_name, 'SUCCESS', f"Table {table_schema}.{table_name} does not require data migration", "Table does not require data migration")
+        print(f"=============================================\n")
